@@ -4,11 +4,13 @@ import os
 
 try:
     import numpy as np
+    import sklearn.linear_model
 except ImportError as e:
     os.system("sudo pip3 install numpy")
     import numpy as np
 
     def ridge(data):
+    from sklearn.linear_model import Ridge
     n_alphas = 200
     alphas = np.logspace(-3,4, n_alphas) #对数等比数列
     clf = linear_model.Ridge(fit_intercept=True)
@@ -64,6 +66,7 @@ except ImportError as e:
     pass
     
 def lasso(data):
+from sklearn.linear_model import Lasso
     n_alphas = 200
     alphas = np.logspace(-5, 0, n_alphas)  # 对数等比数列
     coefs = []
