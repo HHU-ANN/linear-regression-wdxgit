@@ -70,7 +70,7 @@ def lasso(data):
     score = []
     intercept = []
     c = 0
-    las = Lasso(normalize=True)
+    las = lasso(normalize=True)
     for a in alphas:
         las.set_params(alpha=a)
         las.fit(X_train, y_train)
@@ -87,7 +87,7 @@ def lasso(data):
                                'weights': coefs[i]})
             print(fd)
             print('intercept:{}\nalphas:{}\nmax(score):{}'.format(intercept[i], alphas[i], score[i]))
-    las1 = Lasso(normalize=True)
+    las1 = lasso(normalize=True)
     las1.set_params(alpha = c)
     las1.fit(X_train, y_train)
     y_pre = las1.predict(X_test)
@@ -100,7 +100,7 @@ def lasso(data):
     print('The value of RMSE in max(score):', sum_erro)
     print('***************************************************')
     # 交叉验证，找到模型最优的alphas值
-    lasso_cv = LassoCV(alphas=alphas, normalize=True, max_iter=1000, cv=None)
+    lasso_cv = lassoCV(alphas=alphas, normalize=True, max_iter=1000, cv=None)
     lasso_cv.fit(X_train, y_train)
     fr = pd.DataFrame({'variable': ['Sex', 'Length', 'Diameter', 'Height', 'Wholeweight', 'Shuckedweight',
                                     'Visceraweight', 'Shellweight'],
